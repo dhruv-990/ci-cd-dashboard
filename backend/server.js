@@ -1,16 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const { fetchWorkflowRuns } = require('./githubService');
+const { fetchWorkflowRuns, extractRepoInfo } = require('./githubService');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/api/workflows', async (req, res) => {
   try {
-    const runs = await fetchWorkflowRuns();
+    const { repo } = req.query;
+    
+    if (!repo) {
+      return res.status(400).json({ 
+        error: 'Repository URL is required. Use ?repo=github.com/owner/repo' 
+      });
+    }
+
+    const runs = await fetchWorkflowRuns(repo);
     res.json(runs.map(run => ({
       id: run.id,
       name: run.name,
