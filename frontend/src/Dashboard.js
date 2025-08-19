@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:5000';
+
 const Dashboard = () => {
   const [runs, setRuns] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,7 +17,7 @@ const Dashboard = () => {
     setError('');
     
     try {
-      const response = await axios.get(`http://localhost:5000/api/workflows?repo=${encodeURIComponent(repo)}`);
+      const response = await axios.get(`${API_BASE}/api/workflows?repo=${encodeURIComponent(repo)}`);
       setRuns(response.data);
       setCurrentRepo(repo);
     } catch (err) {
