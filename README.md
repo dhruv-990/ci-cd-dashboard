@@ -1,35 +1,56 @@
-# 🚀 CI/CD Dashboard Viewer
+# CI/CD Dashboard
 
-A simple React-based dashboard to visualize GitHub Actions workflow runs for your repository. It fetches the latest builds, shows their status, duration, and provides direct links to GitHub.
+A web-based dashboard for viewing GitHub Actions CI/CD workflow runs for any repository.
 
-> 🔧 Currently configured to work with your own GitHub repo and token (set in `.env`).
+## Features
 
----
+- 🚀 View CI/CD workflow runs for any GitHub repository
+- 📊 Real-time status and conclusion information
+- ⏱️ Duration tracking for workflow runs
+- 🔗 Direct links to GitHub workflow details
+- 💻 Simple web interface - just paste a repository URL
 
-## 🖼️ Features
+## How to Use
 
-- ✅ Fetches latest GitHub Actions workflow runs
-- ✅ Displays status (success, failure, in progress)
-- ✅ Shows build start/end time and duration
-- ✅ Clickable link to each workflow run on GitHub
-- 🧪 Useful for monitoring build pipelines at a glance
+1. Start the backend server (see `backend/README.md` for setup)
+2. Start the frontend (see `frontend/README.md` for setup)
+3. Enter any GitHub repository URL in the format:
+   - `github.com/owner/repo`
+   - `owner/repo`
+   - `github.com/owner/repo.git`
+4. View the CI/CD dashboard with workflow runs, status, and timing
 
----
+## Quick Start
 
-## 📦 Tech Stack
-
-- React.js (frontend)
-- GitHub REST API
-- dotenv (for managing tokens)
-- Node.js (if backend added later)
-- Docker (optional setup available)
-
----
-
-## 🚀 Getting Started (Local Setup)
-
-### 1. Clone this repo
-
+### Backend
 ```bash
-git clone https://github.com/dhruv-990/ci-cd-dashboard.git
-cd ci-cd-dashboard/frontend
+cd backend
+npm install
+# Create .env file with GITHUB_TOKEN (optional for public repos)
+node server.js
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm start
+```
+
+## Supported Repository Formats
+
+- `facebook/react` - Owner/Repo format
+- `github.com/microsoft/vscode` - Full GitHub URL
+- `github.com/vercel/next.js.git` - Git clone URL
+
+## Requirements
+
+- Node.js 14+
+- GitHub Personal Access Token (classic) with `repo` scope for private repos
+- Repository must have GitHub Actions enabled
+
+## Architecture
+
+- Backend: Express.js server with GitHub API integration
+- Frontend: React.js dashboard with real-time updates
+- API: RESTful endpoint for fetching workflow runs
