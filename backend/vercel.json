@@ -4,8 +4,5 @@
 		"api/*.js": {
 			"runtime": "nodejs18.x"
 		}
-	},
-	"env": {
-		"GITHUB_TOKEN": "@github_token"
 	}
 } 
